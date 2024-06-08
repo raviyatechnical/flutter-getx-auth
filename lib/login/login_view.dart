@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
-  _LoginViewState createState() => _LoginViewState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
 class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> formKey = GlobalKey();
-  LoginViewModel _viewModel = Get.put(LoginViewModel());
+  final LoginViewModel _viewModel = Get.put(LoginViewModel());
 
   TextEditingController emailCtr = TextEditingController();
   TextEditingController passwordCtr = TextEditingController();
@@ -21,7 +21,9 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _formType == FormType.login ? Text('Login') : Text('Register'),
+        title: _formType == FormType.login
+            ? const Text('Login')
+            : const Text('Register'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -44,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
           },
           decoration: inputDecoration('E-mail', Icons.person),
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         TextFormField(
@@ -62,7 +64,7 @@ class _LoginViewState extends State<LoginView> {
               await _viewModel.loginUser(emailCtr.text, passwordCtr.text);
             }
           },
-          child: Text('Login'),
+          child: const Text('Login'),
         ),
         TextButton(
           onPressed: () {
@@ -70,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
               _formType = FormType.register;
             });
           },
-          child: Text('Does not have an account?'),
+          child: const Text('Does not have an account?'),
         )
       ]),
     );
@@ -90,7 +92,7 @@ class _LoginViewState extends State<LoginView> {
           },
           decoration: inputDecoration('E-mail', Icons.person),
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         TextFormField(
@@ -102,7 +104,7 @@ class _LoginViewState extends State<LoginView> {
           controller: passwordCtr,
           decoration: inputDecoration('Password', Icons.lock),
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         TextFormField(
@@ -119,7 +121,7 @@ class _LoginViewState extends State<LoginView> {
               await _viewModel.registerUser(emailCtr.text, passwordCtr.text);
             }
           },
-          child: Text('Register'),
+          child: const Text('Register'),
         ),
         TextButton(
           onPressed: () {
@@ -127,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
               _formType = FormType.login;
             });
           },
-          child: Text('Login'),
+          child: const Text('Login'),
         )
       ]),
     );
@@ -137,10 +139,10 @@ class _LoginViewState extends State<LoginView> {
 InputDecoration inputDecoration(String labelText, IconData iconData,
     {String? prefix, String? helperText}) {
   return InputDecoration(
-    contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+    contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
     helperText: helperText,
     labelText: labelText,
-    labelStyle: TextStyle(color: Colors.grey),
+    labelStyle: const TextStyle(color: Colors.grey),
     fillColor: Colors.grey.shade200,
     filled: true,
     prefixText: prefix,
@@ -148,19 +150,19 @@ InputDecoration inputDecoration(String labelText, IconData iconData,
       iconData,
       size: 20,
     ),
-    prefixIconConstraints: BoxConstraints(minWidth: 60),
+    prefixIconConstraints: const BoxConstraints(minWidth: 60),
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.black)),
+        borderSide: const BorderSide(color: Colors.black)),
     focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.black)),
+        borderSide: const BorderSide(color: Colors.black)),
     errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.black)),
+        borderSide: const BorderSide(color: Colors.black)),
     border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.black)),
+        borderSide: const BorderSide(color: Colors.black)),
   );
 }
 

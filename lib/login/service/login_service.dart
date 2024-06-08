@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:auth/login/model/login_request_model.dart';
 import 'package:auth/login/model/login_response_model.dart';
 import 'package:auth/login/model/register_request_model.dart';
@@ -10,7 +9,8 @@ import 'package:get/get_connect/http/src/status/http_status.dart';
 /// via authenticaton related APIs
 class LoginService extends GetConnect {
   // final String loginUrl = 'http://10.0.2.2:8000/api/login';
-  final String loginUrl = 'http://127.0.0.1:8000/api/login';
+  // final String loginUrl = 'http://127.0.0.1:8000/api/login';
+  final String loginUrl = 'https://reqres.in/api/login';
   final String registerUrl = 'https://reqres.in/api/register';
 
   Future<LoginResponseModel?> fetchLogin(LoginRequestModel model) async {
@@ -18,7 +18,6 @@ class LoginService extends GetConnect {
       "Content-Type": 'application/json',
       "Accept": "multipart/form-data"
     });
-    inspect(response);
     if (response.statusCode == HttpStatus.ok) {
       // print(response.body['data']['token']);
       return LoginResponseModel.fromJson(response.body['data']);
@@ -29,8 +28,10 @@ class LoginService extends GetConnect {
 
   Future<RegisterResponseModel?> fetchRegister(
       RegisterRequestModel model) async {
-    final response = await post(registerUrl, model.toJson());
-
+    final response = await post(registerUrl, model.toJson(), headers: {
+      "Content-Type": 'application/json',
+      "Accept": "multipart/form-data"
+    });
     if (response.statusCode == HttpStatus.ok) {
       return RegisterResponseModel.fromJson(response.body);
     } else {
