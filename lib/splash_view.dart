@@ -1,18 +1,17 @@
 import 'package:auth/core/authentication_manager.dart';
-import 'package:auth/home_view.dart';
-import 'package:auth/login/login_view.dart';
 import 'package:auth/onboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashView extends StatelessWidget {
+  SplashView({super.key});
   final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
 
   Future<void> initializeSettings() async {
     _authmanager.checkLoginStatus();
 
     //Simulate other services for 3 seconds
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
   }
 
   @override
@@ -23,10 +22,11 @@ class SplashView extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return waitingView();
         } else {
-          if (snapshot.hasError)
+          if (snapshot.hasError) {
             return errorView(snapshot);
-          else
-            return OnBoard();
+          } else {
+            return const OnBoard();
+          }
         }
       },
     );
@@ -37,14 +37,14 @@ class SplashView extends StatelessWidget {
   }
 
   Scaffold waitingView() {
-    return Scaffold(
+    return const Scaffold(
         body: Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: CircularProgressIndicator(),
           ),
           Text('Loading...'),
